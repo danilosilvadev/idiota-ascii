@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>O Idiota — Varvara</title>
+    
+    <!-- wasm-opt 123 rejects the bulk-memory ops rustc emits. Skip it. -->
+    
+<script type="module">
+import init, * as bindings from './the_idiot-1a27fa2e3d6e86e5.js';
+const wasm = await init({ module_or_path: './the_idiot-1a27fa2e3d6e86e5_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: #070910;
+        overflow: hidden;
+      }
+      #bevy {
+        width: 100%;
+        height: 100%;
+        display: block;
+        outline: none;
+      }
+      #start-note {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 14px;
+        margin: 0;
+        text-align: center;
+        color: #d5dbe6;
+        font: 14px/1.4 ui-monospace, monospace;
+        pointer-events: none;
+        z-index: 2;
+      }
+    </style>
+  <link rel="modulepreload" href="./the_idiot-1a27fa2e3d6e86e5.js" crossorigin="anonymous" integrity="sha384-/YqkJpHCbBZgpJ4yheeBctvFAFV2EZY+W9M0fNL0wKVL4NqBuVx5ZjTYl/f0x8HB"><link rel="preload" href="./the_idiot-1a27fa2e3d6e86e5_bg.wasm" crossorigin="anonymous" integrity="sha384-i2y2eiTVVzpHFKlM/gPG7O4DFMmP5duSZEIvhiuCWwpO5om4c0NrR7ag8pAhdR3x" as="fetch" type="application/wasm"></head>
+  <body>
+    <canvas id="bevy" tabindex="0"></canvas>
+    <p id="start-note">Clique na tela para começar.</p>
+    <script>
+      document.getElementById("bevy").addEventListener("pointerdown", function () {
+        var note = document.getElementById("start-note");
+        if (note) note.remove();
+      }, { once: true });
+    </script>
+  </body>
+</html>
